@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var miFuncion = function (valor) {
+        valor *= 2;
+        return valor;
+      };
+      var total = 2;
+      for (i = 0; i < 10; i++) {
+        total = miFuncion(total);
+      }
+      alert(total);
+
+      var suma = function (a, b) {
+        return a + b;
+      };
+      var resultado = suma(19, 4);
+      alert(resultado);
+
+      (function () {
+        alert("Hola desde una función anónima autoinvocada");
+      }());
+    </script>
+  </body>
+</html>

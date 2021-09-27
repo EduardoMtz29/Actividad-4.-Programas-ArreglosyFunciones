@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muestra de Primitivas+DOM</title>
+    <link rel="stylesheet" href="css/EJS_3.css" type="text/css" />
+    <!--Links de bootstrap-->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1><a href="#">¡Javascript!</a></h1>
+    </header>
+    <section class="row container-fluid" id="todo">
+      <aside id="lateral" class="col-sm-3">
+        <select name="" id="temas">
+          <option value="0" >Seleccione...</option>
+          <option value="nodos">Reservaciones</option>
+        </select>
+      </aside>
+      <section id="principal" class="col-sm-9">
+        <article id="datos" class="contenedor">
+          <h3>Trabajo con Tipo de Datos</h3>
+          <input
+            type="text"
+            name=""
+            id="palabra"
+            placeholder="Introduce una palabra"
+          />
+          <input
+            type="text"
+            name=""
+            id="numero"
+            placeholder="Capture un número decimal"
+          />
+          <input type="button" value="Mostrar" onclick="mostrarDatos()" />
+        </article>
+
+        <article id="if" class="contenedor">
+          <h3>Trabajo con if</h3>
+          <input
+            type="text"
+            name=""
+            id="n2"
+            placeholder="Capture un número entero"
+          />
+          <input type="radio" name="opcion" value="a" checked />Par/Impar
+          <input type="radio" name="opcion" value="b" />Votar
+          <a class="btn btn-info" id="btnSi" onclick="si();"> Identificar </a>
+        </article>
+
+        <article id="while" class="contenedor">
+          <h3>Trabajo con while</h3>
+          <input
+            type="text"
+            name=""
+            id="n3"
+            placeholder="Capture un número entero"
+          />
+          <input
+            type="button"
+            class="btn btn-info"
+            value="Calcular"
+            href=""
+            onclick="factorialWhile()"
+          />
+          <label id="etiqueta" for=""> </label>
+          <input type="text" id="res" placeholder="El resultado es:" disabled />
+        </article>
+
+        <article id="for" class="contenedor">
+          <h3>Trabajo con for</h3>
+          <input
+            type="text"
+            name=""
+            id="n4"
+            placeholder="Capture un número entero"
+          />
+          <span class="btn btn-info" onclick="primoFor()"> Calcular </span>
+        </article>
+
+        <article id="arreglo" class="contenedor">
+          <h3 id="titulo">Texto</h3>
+          <input
+            type="text"
+            id="n5"
+            placeholder="Capture un día de la semana en número"
+          />
+          <input
+            type="button"
+            class="btn btn-info"
+            value="Mostrar"
+            id="iniciar"
+          />
+        </article>
+
+        <article id="promedio">
+          <h3>Datos</h3>
+          <input type="number" class="numeros" /> <br />
+          <input type="number" class="numeros" /> <br />
+          <input type="number" class="numeros" /> <br />
+          <input type="button" value="Calcular" id="calcular" />
+        </article>
+
+        <article id="estilo" class="contenedor">
+          <h3>Modificar estilos</h3>
+          <div class="uno" onmouseover="uno()" onclick=""></div>
+          <div class="dos" onmouseover="dos()"></div>
+          <div class="tres" onmouseover="tres()"></div>
+          <div class="cuatro" onmouseover="cuatro()"></div>
+        </article>
+
+        <article id="imagenes" class="contenedor"></article>
+
+        <article id="nodos" class="contenedor">
+          <h3>Creación de Nodos</h3>
+          <select name="" id="reservacion">
+            <option value="0" readonly>Selecciona una opción</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+          <p id="mesas"></p>
+          <a id="mostrar">Mostrar</a>
+        </article>
+
+        <hr />
+        <p id="resultado" class="res">Mostrar resultados desde JavaScript</p>
+      </section>
+    </section>
+
+    <footer>
+      <h6>Realizado Por: Martínez Galván Diego Eduardo</h6>
+    </footer>
+    <script src="js/funcionalidad.js"></script>
+  </body>
+</html>
