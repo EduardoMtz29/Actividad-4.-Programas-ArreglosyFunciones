@@ -161,7 +161,7 @@ let mesas = function () {
             'Adultos: <input type="number" name="adultos" id="adultos' + i + '" min="1" max="4"><br>' +
             'Menores: <input type="number" name="menores" id="menores' + i + '" min="1" max="3"><br><hr>'
     }
-    document.getElementById("mesas").innerHTML = contenido+"<br>"+mesasMenores;
+    document.getElementById("mesas").innerHTML = contenido;
 }
 
 //Uso de LocalStorage
