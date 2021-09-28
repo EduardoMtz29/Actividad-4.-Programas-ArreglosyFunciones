@@ -158,20 +158,9 @@ let mesas = function () {
     for (i = 0; i < nm; i++) {
         contenido += '<h3>Mesa: ' + (i + 1) + '</h3>' +
             '<h4> Número de Comensales</h4>' +
-            'Adultos: <input type="number" name="adultos" id="adultos' + i + '" min="1" max="4"><br>'
+            'Adultos: <input type="number" name="adultos" id="adultos' + i + '" min="1" max="4"><br>' +
+            'Menores: <input type="number" name="menores" id="menores' + i + '" min="1" max="3"><br><hr>'
     }
-    let mesasMenores = '';
-    let numAdultos = document.getElementsByName('adultos');
-    if (numAdultos == 1) {
-        mesasMenores = 'Menores: <input type="number" name="menores" id="menores' + i + '" min="1" max="3"><br><hr>'
-    } else if (numAdultos = 2) {
-        mesasMenores = 'Menores: <input type="number" name="menores" id="menores' + i + '" min="1" max="2"><br><hr>'
-    } else if (numAdultos == 3) {
-        mesasMenores = 'Menores: <input type="number" name="menores" id="menores' + i + '" min="1" max="1"><br><hr>'
-    } else if (numAdultos == 4) {
-        mesasMenores = 'Menores: <input type="number" name="menores" id="menores' + i + '" min="0" max="0"><br><hr>'
-    }
-
     document.getElementById("mesas").innerHTML = contenido+"<br>"+mesasMenores;
 }
 
