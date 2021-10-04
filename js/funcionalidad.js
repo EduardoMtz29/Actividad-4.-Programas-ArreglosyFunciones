@@ -1,12 +1,11 @@
 document.getElementById('temas').addEventListener("change", temaSeleccionado);
-document.getElementById('iniciar').addEventListener("click", function () { arreglo() });
-document.getElementById('calcular').addEventListener("click", function () { promedio() });
 
 //Función para inicializar variables y limpiar articulos, y mostrar cajas
 function temaSeleccionado() {
     document.getElementById("numero").value = null;
-    document.getElementById("palabra").value = null;
-    document.getElementById("resultado").innerHTML = "¡Resultados!";
+    document.getElementById("color").value = null;
+    document.getElementById("resultado").innerHTML = "¡Resultados! <br>";
+    document.getElementById("resultado2").innerHTML = "¡Resultados! <br>";
 
     //getElementsByTagName convierte en arreglo porque guarda más de un elemento
     capas = document.getElementsByTagName("article");
@@ -21,165 +20,108 @@ function temaSeleccionado() {
     document.getElementById(articulo).style.display = "block";
 }
 
-function mostrarDatos() {
-    var palabra = document.getElementById("palabra").value;
-    var n1 = document.getElementById("numero").value;
-    numInt = parseInt(n1);
-    numFloat = parseFloat(n1);
-    datos = "Caracter: " + palabra +
-        "<br> Cadena: " + n1 +
-        "<br> Entero: " + numInt +
-        "<br> Decimal: " + numFloat +
-        "<br> Concatenación: " + (palabra + ("-" + n1)) +
-        "<br> Operación: " + (numInt + numFloat);
-    document.getElementById("resultado").innerHTML = datos;
+function mostrarCajas() {
+    var numero = parseInt(document.getElementById("numero").value);
+    var color = document.getElementById("color").value;
+    var borde = document.getElementById("borde").value;
+    for (i = 0; i < numero; i++) {
+        var caja = document.createElement("p");
+        caja.style.height = "60px";
+        caja.style.width = "60px";
+        caja.style.display = "inline-block";
+        caja.style.margin = "15px";
+        caja.style.border = color + " " + borde;
+        resultado.appendChild(caja);
+    }
 }
 
-function si() {
-    var num = parseInt(document.getElementById("n2").value);
-    var r = document.getElementsByName("opcion");
-    var res = null;
-    for (var i = 0; i < r.lenght; i++) {
-        if (r[i].checked) {
-            var e = r[i].value;
-        }
-    }
-    switch (e) {
-        case 'a': var tipo = num % 2;
-            if (tipo == 0) {
-                res = "¡Es un número es par!";
-            } else {
-                res = "¡Es un número impar!";
-            }
-            break;
-        case 'b': if (num >= 18) {
-            res = "¡Sí puedes votar!";
-        } else {
-            res = "No puedes votar... unu";
-        }
-            break;
-    }
-    document.getElementById("resultado").innerHTML = res;
+function mostrarEncuesta() {
+    var lugar = document.getElementById("lugar").value;
+    var estudiar = document.getElementById("estudiar").value;
+    var aprender = document.getElementById("aprender").value;
+    var vivir = document.getElementById("vivir").value;
+    var profesión = document.getElementById("profesión").value;
+    datos = "¡Resultados!<br><b>¿Qué lugar te gustaría visitar algún día?</b> <br>R= " + lugar +
+        "<br><b>¿Qué has querido estudiar hace tiempo?</b> <br>R= " + estudiar +
+        "<br><b>¿Qué siempre has querido aprender?</b> <br>R= " + aprender +
+        "<br><b>¿Dónde es tu lugar ideal para vivir?</b> <br>R= " + vivir +
+        "<br><b>¿Qué profesión te gustaría ejercer?</b> <br>R= " + profesión;
+    document.getElementById("resultado2").innerHTML = datos;
 }
 
-function factorialWhile() {
-    var num = parseInt(document.getElementById("n3").value);
-    var fact = num;
-    fact--;
-    datos = num.toString() + '!=';
-    document.getElementById("etiqueta").innerHTML = datos;
-    datos = num.toString();
-    while (fact > 1) {
-        num *= fact;
-        datos += '*' + fact.toString();
-        fact--;
+//Tarjeta
+document.getElementById('tipo_tar').addEventListener("change", tipoTarSeleccionado);
+document.getElementById('bcg_col').addEventListener("change", colorFondo);
+document.getElementById('mostrar_tarfelH').addEventListener("click", function () { mostrarTarjetaH(); });
+document.getElementById('mostrar_tarfelN').addEventListener("click", function () { mostrarTarjetaN(); });
+document.getElementById('mostrar_tarfelP').addEventListener("click", function () { mostrarTarjetaP(); });
+
+function tipoTarSeleccionado() {
+    capasImg = document.getElementsByName("tar_img");
+    for (i = 0; i < capasImg.length; i++) {
+        capasImg[i].style.display = "none";
     }
-    datos += '=' + num.toString();
-    document.getElementById("res").value = datos;
-    document.getElementById("resultado").innerHTML = datos;
+    var imgtarjeta = document.getElementById("tipo_tar").value;
+    document.getElementById(imgtarjeta).style.display = "block";
+    var temaTarj = document.getElementById("tipo_tar").value;
+    document.getElementById(temaTarj).style.display = "block";
+}
+var imgTarjeta = function (nombreFoto) {
+    document.getElementById("Vista_Previa").src = "img/" + nombreFoto + ".jpg";
+    let img_trj = document.getElementById("Vista_Previa_Img").innerHTML;
+    localStorage.setItem('img_trj', img_trj);
 }
 
-function primoFor() {
-    var num = parseInt(document.getElementById("n4").value);
-    var cant = 0;
-    datos = num.toString() + ': ';
-    for (var i = 0; i <= num; i++) {
-        if (num % i == 0) {
-            cant++;
-        }
-    }
-    if (cant != 2) {
-        datos += "No es primo";
-    } else {
-        datos += "Sí es primo";
-    }
-    document.getElementById("resultado").innerHTML = datos;
+function colorFondo() {
+    var bcg_col = document.getElementById('bcg_col').value;
+    document.getElementById('VistaPrevia').style.backgroundColor = bcg_col;
+    localStorage.setItem('bcg_color', bcg_col);
 }
 
-let arreglo = function () {
-    let semana = new Array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
-    console.table(semana);
-    let num = parseInt(document.getElementById("n5").value);
-    datos = '';
-    for (dia in semana) {
-        datos += semana[dia] + ', '
-    }
-    datos += '<br>Día ' + num.toString() + '=' + semana[num - 1];
-    document.getElementById("resultado").innerHTML = datos;
-};
-
-/*(function () {
-    document.getElementsById("titulo").innerHTML = "Recorrido de Arreglos";
-}());*/
-
-
-
-let promedio = function () {
-    let numeros = document.getElementsByClassName('numeros');
-    let valores = [];
-    for (i = 0; i < numeros.length; i++) {
-        valores[i] = parseFloat(numeros[i].value);
-        console.table(valores);
-    }
-    let Usuario = {
-        matricula: '20001019',
-        nombre: 'Eduardo',
-        correo: '20001019@alumnos.utleon.edu.mx',
-        domicilio: {
-            calle: 'Orense',
-            numero: '1214',
-            colonia: 'Vibar',
-            ciudad: 'León'
-        }
-    };
-};
-
-var uno = function () {
-    document.getElementById("resultado").style.backgroundColor = "#ff0055";
+function nombreEnvia() {
+    var nom_e = document.getElementById('nombre_envia').value;
+    var nom_e_color = document.getElementById('color_nombre_envía').value;
+    document.getElementById('nombre_envia_texto').innerHTML = nom_e;
+    document.getElementById('nombre_envia_texto').style.color = nom_e_color;
+    document.getElementById('nombre_envia_texto').style.fontSize = "40px";
+    localStorage.setItem('nom_e', nom_e);
+    localStorage.setItem('nom_e_color', nom_e_color);
 }
-var dos = function () {
-    document.getElementById("resultado").style.backgroundColor = "#00ffff";
-}
-var tres = function () {
-    document.getElementById("resultado").classList.add('mas');
-}
-var cuatro = function () {
-    document.getElementById("resultado").style.backgroundColor = "transparent";
-    document.getElementById("resultado").classList.remove('mas');
+function nombreEnvia() {
+    var nom_e = document.getElementById('nombre_envia').value;
+    var nom_e_color = document.getElementById('color_nombre_envía').value;
+    document.getElementById('nombre_envia_texto').innerHTML = nom_e;
+    document.getElementById('nombre_envia_texto').style.color = nom_e_color;
+    document.getElementById('nombre_envia_texto').style.fontSize = "40px";
+    localStorage.setItem('nom_e', nom_e);
+    localStorage.setItem('nom_e_color', nom_e_color);
 }
 
-//Trabajo con Nodos
-document.getElementById('reservacion').addEventListener("change", function () { mesas(); });
-document.getElementById('mostrar').addEventListener("click", function () { mostrar(); });
-
-let mesas = function () {
-    let nm = document.getElementById('reservacion').value;
-    let contenido = '';
-    for (i = 0; i < nm; i++) {
-        contenido += '<h3>Mesa: ' + (i + 1) + '</h3>' +
-            '<h4> Número de Comensales</h4>' +
-            'Adultos: <input type="number" name="adultos" id="adultos' + i + '" min="1" max="4"><br>' +
-            'Menores: <input type="number" name="menores" id="menores' + i + '" min="1" max="3"><br><hr>'
-    }
-    document.getElementById("mesas").innerHTML = contenido;
+function saludoTexto() {
+    var sal_tex = document.getElementById('saludo').value;
+    var sal_tex_color = document.getElementById('color_saludo').value;
+    document.getElementById('saludo_texto').innerHTML = sal_tex;
+    document.getElementById('saludo_texto').style.color = sal_tex_color;
+    document.getElementById('saludo_texto').style.fontSize = "25px";
+    localStorage.setItem('sal_tex', sal_tex);
+    localStorage.setItem('sal_tex_color', sal_tex_color);
 }
-
-//Uso de LocalStorage
-let mostrar = function () {
-    let mesas = document.getElementById("mesas").innerHTML;
-    localStorage.setItem('mesa', mesas);
-    let cAdultos = document.getElementsByName("adultos");
-    let vAdultos = [];
-    for (let i = 0; i < cAdultos.length; i++) {
-        vAdultos[i] = cAdultos[i].value;
-        localStorage.setItem('vAdultos', vAdultos);
-    }
-
-    let cMenores = document.getElementsByName("menores");
-    let vMenores = [];
-    for (let i = 0; i < cMenores.length; i++) {
-        vMenores[i] = cMenores[i].value;
-        localStorage.setItem('vMenores', vMenores);
-    }
-    window.open("DatosReservacion.html");
+function cuerpoTexto() {
+    var cuerpo_tex = document.getElementById('cuerpo_tex').value;
+    cuerpo_tex = cuerpo_tex.replace(/\n/g, "<br/>");
+    var clr_cuerpo_tex = document.getElementById('color_cuerpo_tex').value;
+    document.getElementById('cuerpo_texto').innerHTML = cuerpo_tex;
+    document.getElementById('cuerpo_texto').style.color = clr_cuerpo_tex;
+    document.getElementById('cuerpo_texto').style.fontSize = "23px";
+    localStorage.setItem('cuerpo_tex', cuerpo_tex);
+    localStorage.setItem('clr_cuerpo_tex', clr_cuerpo_tex);
+}
+let mostrarTarjetaH = function () {
+    window.open('Halloween.html');
+}
+let mostrarTarjetaN = function () {
+    window.open('Navidena.html');
+}
+let mostrarTarjetaP = function () {
+    window.open('Programador.html');
 }

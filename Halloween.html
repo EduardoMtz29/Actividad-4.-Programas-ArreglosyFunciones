@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarjeta de felicitación</title>
+    <link rel="stylesheet" href="css/EJS_3.css" type="text/css" />
+    <!--Links de bootstrap-->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@300&family=Pacifico&family=Press+Start+2P&family=Rock+Salt&display=swap"
+      rel="stylesheet"
+    />
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body style="font-family: 'Rock Salt', cursive;">
+    <section id="Tar_Fel_Caja_0" class="row container-fluid">
+      <article id="Tar_Fel_Caja" class="contenedor">
+        <section id="VistaPrevia1" class="VistaPrevia">
+          <section id="nombre_envia_caja1">
+            <p id="nombre_envia_texto1"></p>
+          </section>
+          <section id="saludo_texto_caja1">
+            <p id="saludo_texto1"></p>
+          </section>
+          <section id="Vista_Previa_Img1">
+            <img
+              src="img/fondo.png"
+              alt=""
+              id="Vista_Previa1"
+              style="width: 750px; height: 800px; margin: 47px 10px"
+            />
+          </section>
+          <section id="cuerpo_texto_caja1">
+            <p id="cuerpo_texto1"></p>
+          </section>
+        </section>
+      </article>
+    </section>
+    <button
+      style="margin-left: 50%; margin-bottom: 10px"
+      onclick="imprimirPagina();"
+    >
+      Imprimir tarjeta
+    </button>
+    <script src="js/TarFelFuncion.js"></script>
+    <audio
+      autoplay=""
+      loop=""
+      src="musica/Spooky Scary Skeletons Original Song Video.mp3"
+    ></audio>
+  </body>
+</html>

@@ -4,12 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Muestra de Primitivas+DOM</title>
+    <title>Ejercicios</title>
     <link rel="stylesheet" href="css/EJS_3.css" type="text/css" />
     <!--Links de bootstrap-->
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@300&display=swap"
+      rel="stylesheet"
     />
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -22,123 +28,271 @@
     <header>
       <h1><a href="#">¡Javascript!</a></h1>
     </header>
-    <section class="row container-fluid" id="todo">
+    <div class="row container-fluid" id="todo">
       <aside id="lateral" class="col-sm-3">
         <select name="" id="temas">
-          <option value="0" >Seleccione...</option>
-          <option value="nodos">Reservaciones</option>
+          <option value="0" disabled>Seleccione...</option>
+          <option value="cajas">Cajas</option>
+          <option value="encuesta">Encuesta</option>
+          <option value="nodos">Mesas</option>
+          <option value="tarjeta">Tarjeta</option>
         </select>
       </aside>
-      <section id="principal" class="col-sm-9">
-        <article id="datos" class="contenedor">
-          <h3>Trabajo con Tipo de Datos</h3>
+      <div id="principal" class="col-sm-9">
+        <article id="cajas" class="contenedor">
+          <h3>Cajas</h3>
+          <br />
+
           <input
-            type="text"
-            name=""
-            id="palabra"
-            placeholder="Introduce una palabra"
-          />
-          <input
-            type="text"
+            type="number"
             name=""
             id="numero"
-            placeholder="Capture un número decimal"
+            placeholder="Introduce el número de cajas"
           />
-          <input type="button" value="Mostrar" onclick="mostrarDatos()" />
-        </article>
-
-        <article id="if" class="contenedor">
-          <h3>Trabajo con if</h3>
+          <br />
+          <br />
+          <label for="">Selecciona el color de las cajas</label>
           <input
-            type="text"
+            type="color"
             name=""
-            id="n2"
-            placeholder="Capture un número entero"
+            id="color"
+            placeholder="Introduzca un color"
           />
-          <input type="radio" name="opcion" value="a" checked />Par/Impar
-          <input type="radio" name="opcion" value="b" />Votar
-          <a class="btn btn-info" id="btnSi" onclick="si();"> Identificar </a>
-        </article>
-
-        <article id="while" class="contenedor">
-          <h3>Trabajo con while</h3>
-          <input
-            type="text"
-            name=""
-            id="n3"
-            placeholder="Capture un número entero"
-          />
-          <input
-            type="button"
-            class="btn btn-info"
-            value="Calcular"
-            href=""
-            onclick="factorialWhile()"
-          />
-          <label id="etiqueta" for=""> </label>
-          <input type="text" id="res" placeholder="El resultado es:" disabled />
-        </article>
-
-        <article id="for" class="contenedor">
-          <h3>Trabajo con for</h3>
-          <input
-            type="text"
-            name=""
-            id="n4"
-            placeholder="Capture un número entero"
-          />
-          <span class="btn btn-info" onclick="primoFor()"> Calcular </span>
-        </article>
-
-        <article id="arreglo" class="contenedor">
-          <h3 id="titulo">Texto</h3>
-          <input
-            type="text"
-            id="n5"
-            placeholder="Capture un día de la semana en número"
-          />
-          <input
-            type="button"
-            class="btn btn-info"
-            value="Mostrar"
-            id="iniciar"
-          />
-        </article>
-
-        <article id="promedio">
-          <h3>Datos</h3>
-          <input type="number" class="numeros" /> <br />
-          <input type="number" class="numeros" /> <br />
-          <input type="number" class="numeros" /> <br />
-          <input type="button" value="Calcular" id="calcular" />
-        </article>
-
-        <article id="estilo" class="contenedor">
-          <h3>Modificar estilos</h3>
-          <div class="uno" onmouseover="uno()" onclick=""></div>
-          <div class="dos" onmouseover="dos()"></div>
-          <div class="tres" onmouseover="tres()"></div>
-          <div class="cuatro" onmouseover="cuatro()"></div>
-        </article>
-
-        <article id="imagenes" class="contenedor"></article>
-
-        <article id="nodos" class="contenedor">
-          <h3>Creación de Nodos</h3>
-          <select name="" id="reservacion">
-            <option value="0" readonly>Selecciona una opción</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+          <br />
+          <br />
+          <label for="">Selecciona el borde de las cajas</label>
+          <select id="borde">
+            <option value="0" disabled>Seleccione...</option>
+            <option value="dotted">dotted</option>
+            <option value="dashed">dashed</option>
+            <option value="solid">solid</option>
+            <option value="double">double</option>
+            <option value="groove">groove</option>
+            <option value="ridge">ridge</option>
+            <option value="inset">inset</option>
+            <option value="outset">outset</option>
+            <option value="none">none</option>
+            <option value="hidden">hidden</option>
           </select>
-          <p id="mesas"></p>
-          <a id="mostrar">Mostrar</a>
+          <br />
+          <br />
+
+          <input type="button" value="Mostrar" onclick="mostrarCajas()" />
+          <br />
+          <br />
+          <p id="resultado"></p>
         </article>
 
-        <hr />
-        <p id="resultado" class="res">Mostrar resultados desde JavaScript</p>
-      </section>
-    </section>
+        <article id="encuesta" class="contenedor">
+          <h3>Encuesta</h3>
+          <br />
+          <label for="">¿Qué lugar te gustaría visitar algún día?</label>
+          <select name="" id="lugar">
+            <option value="Tokyo">Tokyo</option>
+            <option value="Paris">Paris</option>
+            <option value="Roma">Roma</option>
+          </select>
+          <br />
+          <br />
+          <label for="">¿Qué has querido estudiar hace tiempo?</label>
+          <select name="" id="estudiar">
+            <option value="Desarrollador de videojuegos">
+              Desarrollador de videojuegos
+            </option>
+            <option value="Cocina">Cocina</option>
+            <option value="Ilustración digital">Ilustración digital</option>
+          </select>
+          <br />
+          <br />
+          <label for="">¿Qué siempre has querido aprender?</label>
+          <select name="" id="aprender">
+            <option value="Skate">Skate</option>
+            <option value="Pintar con acuarelas">Pintar con acuarelas</option>
+            <option value="Esculpir">Esculpir</option>
+          </select>
+          <br />
+          <br />
+          <label for="">¿Dónde es tu lugar ideal para vivir?</label>
+          <select name="" id="vivir">
+            <option value="Japón">Japón</option>
+            <option value="Noruega">Noruega</option>
+            <option value="Nueva Zelanda">Nueva Zelanda</option>
+          </select>
+          <br />
+          <br />
+          <label for="">¿Qué profesión te gustaría ejercer?</label>
+          <select name="" id="profesión">
+            <option value="Artista Conceptual">Artista Conceptual</option>
+            <option value="Programador">Programador</option>
+            <option value="Community manager">Community manager</option>
+          </select>
+          <br />
+          <br />
+          <input type="button" value="Mostrar" onclick="mostrarEncuesta()" />
+          <br />
+          <br />
+          <section id="resultado2"></section>
+        </article>
+
+        <article id="tarjeta" class="contenedor">
+          <h3>Crea tu Tarjeta de Felicitación</h3>
+          <br />
+          <h3>Vista Previa</h3>
+          <section id="VistaPrevia" class="VistaPrevia">
+            <section>
+              <section id="nombre_envia_caja">
+                <p id="nombre_envia_texto"></p>
+              </section>
+              <section id="saludo_texto_caja">
+                <p id="saludo_texto"></p>
+              </section>
+              <section id="Vista_Previa_Img">
+                <img
+                  src="img/fondo.jpg"
+                  alt=""
+                  id="Vista_Previa"
+                  style="width: 750px; height: 800px; margin: 47px 5px"
+                />
+              </section>
+              <section id="cuerpo_texto_caja">
+                <p id="cuerpo_texto"></p>
+                <br>
+                <br>
+              </section>
+            </section>
+          </section>
+          <br>
+          <hr>
+          <h4>Elige un tema</h4>
+          <select id="tipo_tar">
+            <option value="0">Seleccione un tipo...</option>
+            <option value="tarNav">Navideña</option>
+            <option value="tarHall">Halloween</option>
+            <option value="tarPro">Día del Programador</option></select
+          ><br />
+          <br />
+          <input
+            type="text"
+            placeholder="Titulo"
+            id="nombre_envia"
+            style="width: 30rem"
+            oninput="nombreEnvia()"
+          /><input
+            type="color"
+            id="color_nombre_envía"
+            oninput="nombreEnvia()"
+          /><br /><br />
+          <input
+            type="text"
+            placeholder="Subtitulo"
+            id="saludo"
+            style="width: 30rem"
+            oninput="saludoTexto()"
+          /><input
+            type="color"
+            id="color_saludo"
+            oninput="saludoTexto()"
+          /><br /><br />
+          <form>
+            <textarea
+              name="cuerpo_tex"
+              id="cuerpo_tex"
+              cols="50"
+              rows="8"
+              placeholder="Mensaje"
+              oninput="cuerpoTexto()"
+            ></textarea>
+            <input type="color" id="color_cuerpo_tex" oninput="cuerpoTexto()" />
+            <p>
+              Elige un color de fondo:&nbsp;<input type="color" id="bcg_col" />
+            </p>
+          </form>
+          <br />
+          <section
+            id="tarNav"
+            name="tar_img"
+            class="contenedorImg"
+            style="display: hidden"
+          >
+            <p>
+              <img
+                src="img/Navidad_1.jpg"
+                alt=""
+                style="height: 280px; width: 280px; margin: 5px 5px"
+                onclick="imgTarjeta('Navidad_1')"
+              />
+              <img
+                src="img/Navidad_2.jpg"
+                alt=""
+                style="height: 280px; width: 280px; margin: 5px 5px"
+                onclick="imgTarjeta('Navidad_2')"
+              />
+              <img
+                src="img/Navidad_3.jpg"
+                alt=""
+                style="height: 280px; width: 280px; margin: 5px 5px"
+                onclick="imgTarjeta('Navidad_3')"
+              />
+            </p>
+            <section>
+              <a style="color: whitesmoke; font-size: 25px; cursor:pointer;" id="mostrar_tarfelN">Generar Tarjeta</a>
+            </section>
+          </section>
+          <section id="tarHall" name="tar_img" class="contenedorImg">
+            <p>
+              <img
+                src="img/Halloween_1.jpg"
+                alt=""
+                style="height: 280px; width: 280px; margin: 5px 5px"
+                onclick="imgTarjeta('Halloween_1')"
+              />
+              <img
+                src="img/Halloween_2.jpg"
+                alt=""
+                style="height: 280px; width: 280px; margin: 5px 5px"
+                onclick="imgTarjeta('Halloween_2')"
+              />
+              <img
+                src="img/Halloween_3.jpg"
+                alt=""
+                style="height: 280px; width: 280px; margin: 5px 5px"
+                onclick="imgTarjeta('Halloween_3')"
+              />
+            </p>
+            <section>
+              <a style="color: whitesmoke; font-size: 25px; cursor:pointer;" id="mostrar_tarfelH">Generar Tarjeta</a>
+            </section>
+          </section>
+          <section id="tarPro" name="tar_img" class="contenedorImg">
+            <p>
+              <img
+                src="img/Programador (1).jpg"
+                alt=""
+                style="height: 280px; width: 280px; margin: 5px 5px"
+                onclick="imgTarjeta('Programador (1)')"
+              />
+              <img
+                src="img/Programador (2).jpg"
+                alt=""
+                style="height: 280px; width: 280px; margin: 5px 5px"
+                onclick="imgTarjeta('Programador (2)')"
+              />
+              <img
+                src="img/Programador (3).jpg"
+                alt=""
+                style="height: 280px; width: 280px; margin: 5px 5px"
+                onclick="imgTarjeta('Programador (3)')"
+              />
+            </p>
+            <section>
+              <a style="color: whitesmoke; font-size: 25px; cursor:pointer;" id="mostrar_tarfelP">Generar Tarjeta</a>
+            </section>
+          </section>
+          <hr />
+          
+        </article>
+      </div>
+    </div>
 
     <footer>
       <h6>Realizado Por: Martínez Galván Diego Eduardo</h6>
