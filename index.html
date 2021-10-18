@@ -320,7 +320,7 @@
             <h1>Encuesta</h1>
             <div class="form-group">
               <h4>¿Te gusta programar?</h4>
-              <label>Sí </label>
+              <label>SÍ </label>
               <input type="radio" v-model="fAnswer" value="Sí" />
               <label>NO </label>
               <input type="radio" v-model="fAnswer" value="no" />
@@ -366,7 +366,7 @@
                   @keyup.enter="add()"
                 />
                 <button class="btn btn-info" @click="add()">
-                  Agregar Lenguaje: {{nLanguages}} 
+                  Agregar Lenguaje: {{nLanguages}}
                 </button>
               </div>
               <div class="form-group">
@@ -383,14 +383,15 @@
               <p>{{fAnswer}}</p>
               <h4>¿Cuánto llevas programando?</h4>
               <p>{{timeCoding}} años</p>
+              <div class="form-group" v-if="timeCoding < 2">
+                <h4>¿Qué le motiva a programar?</h4>
+                <p>{{motivation}}</p>
+              </div>
               <div class="form-group" v-else>
                 <h4>Su experiencia programando:</h4>
                 <p>{{experience}}</p>
               </div>
-              <div class="form-group" v-if="timecoding < 2">
-                <h4>¿Qué le motiva a programar?</h4>
-                <p>{{motivation}}</p>
-              </div>
+              
               <h3>Lenguajes de programación que conoce:</h3>
               <ul>
                 <li v-for="(codeLang, index) in codingLanguages" :key="">
