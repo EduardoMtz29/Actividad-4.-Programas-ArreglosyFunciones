@@ -17,6 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@300&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Popper JS -->
@@ -36,6 +37,7 @@
           <option value="encuesta">Encuesta</option>
           <option value="nodos">Mesas</option>
           <option value="tarjeta">Tarjeta</option>
+          <option value="encuestaPr">Programación encuesta</option>
         </select>
       </aside>
       <div id="principal" class="col-sm-9">
@@ -77,7 +79,12 @@
           <br />
           <br />
 
-          <input type="button" value="Mostrar" onclick="mostrarCajas()" />
+          <input
+            type="button"
+            class="btn btn-info"
+            value="Mostrar"
+            onclick="mostrarCajas()"
+          />
           <br />
           <br />
           <p id="resultado"></p>
@@ -128,7 +135,12 @@
           </select>
           <br />
           <br />
-          <input type="button" value="Mostrar" onclick="mostrarEncuesta()" />
+          <input
+            type="button"
+            class="btn btn-info"
+            value="Mostrar"
+            onclick="mostrarEncuesta()"
+          />
           <br />
           <br />
           <section id="resultado2"></section>
@@ -156,13 +168,13 @@
               </section>
               <section id="cuerpo_texto_caja">
                 <p id="cuerpo_texto"></p>
-                <br>
-                <br>
+                <br />
+                <br />
               </section>
             </section>
           </section>
-          <br>
-          <hr>
+          <br />
+          <hr />
           <h4>Elige un tema</h4>
           <select id="tipo_tar">
             <option value="0">Seleccione un tipo...</option>
@@ -235,7 +247,11 @@
               />
             </p>
             <section>
-              <a style="color: whitesmoke; font-size: 25px; cursor:pointer;" id="mostrar_tarfelN">Generar Tarjeta</a>
+              <a
+                style="color: whitesmoke; font-size: 25px; cursor: pointer"
+                id="mostrar_tarfelN"
+                >Generar Tarjeta</a
+              >
             </section>
           </section>
           <section id="tarHall" name="tar_img" class="contenedorImg">
@@ -260,7 +276,11 @@
               />
             </p>
             <section>
-              <a style="color: whitesmoke; font-size: 25px; cursor:pointer;" id="mostrar_tarfelH">Generar Tarjeta</a>
+              <a
+                style="color: whitesmoke; font-size: 25px; cursor: pointer"
+                id="mostrar_tarfelH"
+                >Generar Tarjeta</a
+              >
             </section>
           </section>
           <section id="tarPro" name="tar_img" class="contenedorImg">
@@ -285,11 +305,100 @@
               />
             </p>
             <section>
-              <a style="color: whitesmoke; font-size: 25px; cursor:pointer;" id="mostrar_tarfelP">Generar Tarjeta</a>
+              <a
+                style="color: whitesmoke; font-size: 25px; cursor: pointer"
+                id="mostrar_tarfelP"
+                >Generar Tarjeta</a
+              >
             </section>
           </section>
           <hr />
-          
+        </article>
+
+        <article id="encuestaPr" class="contenedor">
+          <section class="formulario" id="survey" style="color: whitesmoke">
+            <h1>Encuesta</h1>
+            <div class="form-group">
+              <h4>¿Te gusta programar?</h4>
+              <label>Sí </label>
+              <input type="radio" v-model="fAnswer" value="Sí" />
+              <label>NO </label>
+              <input type="radio" v-model="fAnswer" value="no" />
+            </div>
+            <div v-if="fAnswer === 'Sí'">
+              <div class="form-group">
+                <h4>¿Cuánto llevas programando?</h4>
+                <input
+                  type="number"
+                  class="form-control"
+                  v-model="timeCoding"
+                  min="0"
+                  max="50"
+                />
+              </div>
+              <div class="form-group" v-if="timeCoding < 2">
+                <h4>¿Qué te motiva a programar?</h4>
+                <textarea
+                  cols="30"
+                  rows="10"
+                  class="form-control"
+                  v-model="motivation"
+                ></textarea>
+              </div>
+              <div class="form-group" v-else>
+                <h4>Cuéntanos tu experiencia programando</h4>
+                <textarea
+                  cols="30"
+                  rows="10"
+                  class="form-control"
+                  v-model="experience"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <h4>
+                  ¿Cuántos lenguajes de programación conoces? | Captura uno a
+                  uno
+                </h4>
+                <input
+                  type="text"
+                  v-model="codingLanguage"
+                  class="lang"
+                  @keyup.enter="add()"
+                />
+                <button class="btn btn-info" @click="add()">
+                  Agregar Lenguaje: {{nLanguages}} 
+                </button>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-info" @click="confirm()">
+                  Capturar
+                </button>
+              </div>
+            </div>
+            <div v-else>
+              <h2>Gracias por apoyarnos</h2>
+            </div>
+            <div class="form-group" v-if="showSummary == true">
+              <h4>¿Le gusta programar?</h4>
+              <p>{{fAnswer}}</p>
+              <h4>¿Cuánto llevas programando?</h4>
+              <p>{{timeCoding}} años</p>
+              <div class="form-group" v-else>
+                <h4>Su experiencia programando:</h4>
+                <p>{{experience}}</p>
+              </div>
+              <div class="form-group" v-if="timecoding < 2">
+                <h4>¿Qué le motiva a programar?</h4>
+                <p>{{motivation}}</p>
+              </div>
+              <h3>Lenguajes de programación que conoce:</h3>
+              <ul>
+                <li v-for="(codeLang, index) in codingLanguages" :key="">
+                  {{codeLang}}
+                </li>
+              </ul>
+            </div>
+          </section>
         </article>
       </div>
     </div>
