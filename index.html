@@ -38,6 +38,8 @@
           <option value="nodos">Mesas</option>
           <option value="tarjeta">Tarjeta</option>
           <option value="encuestaPr">Programación encuesta</option>
+          <option value="gimnasio">Gimnasio</option>
+          <option value="cafeteria">Cafetería</option>
         </select>
       </aside>
       <div id="principal" class="col-sm-9">
@@ -391,13 +393,217 @@
                 <h4>Su experiencia programando:</h4>
                 <p>{{experience}}</p>
               </div>
-              
+
               <h3>Lenguajes de programación que conoce:</h3>
               <ul>
                 <li v-for="(codeLang, index) in codingLanguages" :key="">
                   {{codeLang}}
                 </li>
               </ul>
+            </div>
+          </section>
+        </article>
+
+        <article id="gimnasio" class="contenedor">
+          <section id="stock" style="color: whitesmoke;">
+            <div class="row">
+              <div class="col-6 offset-4">
+                <fieldset class="formulario">
+                  <legend>Nuevo producto</legend>
+                  <div class="form-group">
+                    <label>Nombre del producto</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="newProductName"
+                    />
+                    <label>Cantidad</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      v-model="newProductQuantity"
+                    />
+                    <label>Precio</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      v-model="newProductPrice"
+                      @keyup.enter="add()"
+                    />
+                  </div>
+                  <div class="form-group text-center m-3">
+                    <button class="btn btn-info" @click="add()">Agregar</button>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="m-lg-4">
+              <fieldset>
+                <legend>Producto: {{numProducts}}</legend>
+                <table class="table table-dark table-striped">
+                  <tbody>
+                    <tr
+                      v-for="product in products"
+                      :class="{zero: product.totalPrice==0}"
+                    >
+                      <th>
+                        <div class="input-group sm-6">
+                          <button
+                            class="btn btn-info b"
+                            @click="product.productQuantity--; recalculate()"
+                            :disabled="product.productQuantity == 0"
+                          >
+                            -
+                          </button>
+                          <input
+                            type="number"
+                            class="form-control q"
+                            v-model="product.productQuantity"
+                            @keyup="recalculate()"
+                          />
+                          <button
+                            class="btn btn-info b"
+                            @click="product.productQuantity++; recalculate()"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </th>
+                      <td>{{product.productName}}</td>
+                      <td v-if="product.totalPrice>0">
+                        ${{product.singlePrice}}
+                      </td>
+                      <td v-if="product.totalPrice>0">
+                        ${{product.totalPrice}}
+                      </td>
+                      <td colspan="2" v-else class="text-center font">
+                        SIN STOCK
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"></td>
+                      <th>Subtotal:</th>
+                      <td>${{subtotal}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"></td>
+                      <th>IVA</th>
+                      <td>${{iva}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"></td>
+                      <th>Total</th>
+                      <td>${{total}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </fieldset>
+            </div>
+          </section>
+        </article>
+
+        <article id="cafeteria" class="contenedor">
+          <section id="main">
+            <div class="row">
+              <div class="col-3">
+                <section id="wishlist">
+                  <article class="card-left wislist">
+                    <h1 class="text-center">Wishlist</h1>
+                    <ul>
+                      <li v-for="drink in wishlist">
+                        <transition name="aparecer" appear
+                          ><img
+                            :src="drink.img"
+                            class="img-wishlist"
+                            v-if="appear"
+                        /></transition>
+                        {{drink.name}} - ${{drink.price}}
+                      </li>
+                      <hr />
+                      <li>Productos: {{count}} - Total: ${{total}}</li>
+                    </ul>
+                  </article>
+                </section>
+              </div>
+
+              <div class="col-9">
+                <section id="content">
+                  <div class="row">
+                    <div class="col-12">
+                      <article class="card-left text-center search">
+                        <form>
+                          <h1>Buscar por:</h1>
+                          <div class="form-group row">
+                            <div class="col-6">
+                              Nombre del producto
+                              <input
+                                type="text"
+                                class="form-control input-card"
+                                v-model="toSearch"
+                                @keyup="validateSearchText()"
+                              />
+                            </div>
+                            <div class="col-6">
+                              Un precio máximo
+                              <input
+                                type="number"
+                                class="form-control input-card"
+                                v-model="maximum"
+                              />
+                              <br />
+                            </div>
+                          </div>
+                        </form>
+                      </article>
+                      <h1>Te ofrecemos...</h1>
+                      <article class="card-products products">
+                        <div
+                          class="card"
+                          v-for="drink in searchProduct"
+                          :class="notAvailableCard(drink.isAvailable)"
+                        >
+                          <transition name="aparecer" appear>
+                            <img
+                              v-bind:src="drink.img"
+                              alt="Imagen de card"
+                              class="card-img-top"
+                              :class="notAvailableData(drink.isAvailable)"
+                            />
+                          </transition>
+                          <div
+                            class="card-body"
+                            :class="notAvailableData(drink.isAvailable)"
+                          >
+                            <h5 class="card-title">
+                              {{drink.name}}
+                              <h6 v-if="drink.isAvailable == false" class="not">
+                                No disponible
+                              </h6>
+                            </h5>
+                            <p class="card-text" v-if="isSearching==false">
+                              <strong>Tamaño:</strong> {{drink.size}}
+                            </p>
+                            <p class="card-text" v-if="isSearching==false">
+                              <strong>Ingredientes:</strong>
+                              {{drink.ingredients}}
+                            </p>
+                          </div>
+                          <div class="card-footer">
+                            <button
+                              class="btn btn-danger btn-card"
+                              @click="addWishlist(drink.name); appear()"
+                            >
+                              <i class="far fa-heart"></i>
+                            </button>
+                            <span>${{drink.price}}</span>
+                          </div>
+                        </div>
+                      </article>
+                    </div>
+                  </div>
+                </section>
+              </div>
             </div>
           </section>
         </article>
