@@ -259,7 +259,7 @@ const cafeteria = new Vue
                     name: 'Taza de cachorro',
                     isAvailable: true,
                     size: '400 mililitros',
-                    price: 50,
+                    price: 80,
                     ingredients: 'Invita a tu peludo amigo a una taza de cachorro de caribú. Alegra su día con 4 onzas de crema batida.',
                 },
                 {
@@ -267,7 +267,7 @@ const cafeteria = new Vue
                     name: 'Pastel de chocolate pop',
                     isAvailable: false,
                     size: '1 pieza',
-                    price: 150,
+                    price: 50,
                     ingredients: 'Una rica bola de pastel de chocolate bañada en glaseado de chocolate negro y cubierta con una llovizna blanca aterciopelada.',
                 },
             ],
@@ -325,17 +325,7 @@ const wishlist = new Vue
         data: {
             wishlist: [],
             count: 0,
-            appear: true
         },
-        computed: {
-            total: function () {
-                var total = 0;
-                for (wish of this.wishlist) {
-                    total = total + wish.price;
-                }
-                return total;
-            }
-        }
     });
 
 $('#myModal').on('shown.bs.modal', function () {

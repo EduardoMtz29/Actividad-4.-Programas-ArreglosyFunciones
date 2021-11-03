@@ -512,9 +512,9 @@
             <div>
               <div>
                 <section id="content">
-                      <div class="card-left text-center search">
+                      <div class="text-center">
                         <form>
-                          <h1>Buscar por:</h1>
+                          <h1>Menú</h1>
                           <div class="form-group row">
                             <div class="col-6">
                               Nombre del producto
@@ -529,6 +529,8 @@
                               Precio máximo
                               <input
                                 type="number"
+                                min="0"
+                                max="200"
                                 class="form-control input-card"
                                 v-model="maximum"
                               />
@@ -555,10 +557,10 @@
                                   >
                                   <strong>NO DISPONIBLE</strong>
                                   </h1>
-                                  <p v-if="isSearching==false">
+                                  <p>
                                     <strong>Tamaño:</strong> {{drink.size}}
                                   </p>
-                                  <p v-if="isSearching==false">
+                                  <p >
                                     <strong>Ingredientes:</strong>
                                     {{drink.ingredients}}
                                   </p>
@@ -574,14 +576,14 @@
           <br />
 
           <br />
-          <!-- Button trigger modal -->
-          <button
+          <section id="wishlist">
+            <button
             type="button"
             class="btn btn-info"
             data-toggle="modal"
             data-target="#exampleModal"
           >
-            Lista de Deseados
+            Lista de Deseados - {{count}}
           </button>
 
           <!-- Modal -->
@@ -596,7 +598,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">
-                    Modal title
+                    Productos: {{count}}
                   </h5>
                   <button
                     type="button"
@@ -613,11 +615,10 @@
                       <div class="wislist">
                         <h1 class="text-center">Lista de Deseados</h1>
                         <ul style="list-style: none">
+                          <hr>
                           <li v-for="drink in wishlist">
                             {{drink.name}} - ${{drink.price}}
                           </li>
-                          <hr />
-                          <li>Productos: {{count}} - Total: ${{total}}</li>
                         </ul>
                       </div>
                     </section>
@@ -635,6 +636,7 @@
               </div>
             </div>
           </div>
+          </section>          
         </article>
       </div>
     </div>
