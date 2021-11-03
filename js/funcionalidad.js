@@ -231,56 +231,48 @@ const cafeteria = new Vue
         data: {
             products: [
                 {
-                    img: '../img/cafe1.jpg',
-                    name: 'Café Moka Casero',
+                    img: '../img/Cafe_1.jpeg',
+                    name: 'Explosión de manzana caliente',
                     isAvailable: true,
-                    size: 10,
-                    price: 200,
-                    ingredients: '2 tazas de leche de vaca, 1/4 tablillas de chocolate, azúcar (al gusto), 1 pizca de sal, canela en polvo (al gusto), 1 cucharada de café soluble.',
+                    size: '1 litro',
+                    price: 150,
+                    ingredients: 'Sidra de manzana al vapor con sabores de manzana acaramelada y cubierta con crema batida, llovizna de caramelo y canela molida.',
                 },
                 {
-                    img: '../img/cafe2.jpg',
-                    name: 'Café Espresso',
+                    img: '../img/Cafe_2.png',
+                    name: 'Fogata mocha',
                     isAvailable: false,
-                    size: 10,
-                    price: 150,
-                    ingredients: '7g de café molido fino, 1 taza de agua, preferente de alta calidad (no de grifo).',
+                    size: '600 mililitros',
+                    price: 180,
+                    ingredients: 'Chocolate real derretido en leche al vapor y combinado con nuestro rico espresso y sabor a malvavisco tostado. Cubierto con crema batida, mini malvaviscos y chispas de chocolate.',
                 },
                 {
-                    img: '../img/cafe3.jpg',
-                    name: 'Café Latte',
+                    img: '../img/Cafe_3.jpeg',
+                    name: 'Sándwich de gofres de arce',
                     isAvailable: true,
-                    size: 10,
-                    price: 300,
-                    ingredients: '1/2 tazas de leche (fría), 1/2 tazas de agua (caliente), 2 cucharadas de café soluble, 1/2 tazas de leche (caliente), suficiente de canela (para decorar).',
+                    size: '1 pieza',
+                    price: 145,
+                    ingredients: 'Salchicha de pollo gouda, queso gouda y un huevo frito sin jaula intercalado entre dos waffles de arce.',
                 },
                 {
-                    img: '../img/cafe4.jpg',
-                    name: 'Galletas de Avena',
+                    img: '../img/Cafe_4.jpeg',
+                    name: 'Taza de cachorro',
+                    isAvailable: true,
+                    size: '400 mililitros',
+                    price: 50,
+                    ingredients: 'Invita a tu peludo amigo a una taza de cachorro de caribú. Alegra su día con 4 onzas de crema batida.',
+                },
+                {
+                    img: '../img/Cafe_5.jpeg',
+                    name: 'Pastel de chocolate pop',
                     isAvailable: false,
-                    size: 5 + ' Galletas',
-                    price: 100,
-                    ingredients: '2 plátanos maduros, 50 gramos de uvas pasas, 150 gramos de copos de avena, 50 gramos de chips de chocolate negro.',
-                },
-                {
-                    img: '../img/cafe5.jpg',
-                    name: 'Empanadas de Manzana',
-                    isAvailable: true,
-                    size: 3 + ' Empanadas',
+                    size: '1 pieza',
                     price: 150,
-                    ingredients: '2 tazas de harina, 1 taza con agua, 1 taza con jugo de limón, 1 cucharadita de sal, ¼ taza de azúcar en polvo, ¼ taza de azúcar morena, 500gr de manzanas, 2/3 tazas de mantequilla fría, Crema de leche, Nuez moscada, Queso Cheddar.',
-                },
-                {
-                    img: '../img/cafe6.jpg',
-                    name: 'Smoothie de Chocolate',
-                    isAvailable: true,
-                    size: 1,
-                    price: 150,
-                    ingredients: '2 tazas de leche, 2 cucharadas de chocolate en polvo, 2 cucharadas de mantequilla, 100 gr. de chocolate negro, 1 bola de helado de chocolate, 1 taza de hielo',
+                    ingredients: 'Una rica bola de pastel de chocolate bañada en glaseado de chocolate negro y cubierta con una llovizna blanca aterciopelada.',
                 },
             ],
             toSearch: '',
-            maximum: 300,
+            maximum: 200,
             isSearching: false,
         },
         computed: {
@@ -306,7 +298,7 @@ const cafeteria = new Vue
             addWishlist: function (nameProduct) {
                 for (drink of this.products) {
                     if (drink.name == nameProduct) {
-                        wishlist.wishlist.push({ img: drink.img, name: drink.name, price: drink.price });
+                        wishlist.wishlist.push({name: drink.name, price: drink.price });
                         wishlist.count = wishlist.wishlist.length;
                     }
                 }
@@ -345,3 +337,7 @@ const wishlist = new Vue
             }
         }
     });
+
+$('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+})

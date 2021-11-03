@@ -18,6 +18,7 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Popper JS -->
@@ -405,7 +406,7 @@
         </article>
 
         <article id="gimnasio" class="contenedor">
-          <section id="stock" style="color: whitesmoke;">
+          <section id="stock" style="color: whitesmoke">
             <div class="row">
               <div class="col-6 offset-4">
                 <fieldset class="formulario">
@@ -503,35 +504,15 @@
           </section>
         </article>
 
-        <article id="cafeteria" class="contenedor">
-          <section id="main">
-            <div class="row">
-              <div class="col-3">
-                <section id="wishlist">
-                  <article class="card-left wislist">
-                    <h1 class="text-center">Wishlist</h1>
-                    <ul>
-                      <li v-for="drink in wishlist">
-                        <transition name="aparecer" appear
-                          ><img
-                            :src="drink.img"
-                            class="img-wishlist"
-                            v-if="appear"
-                        /></transition>
-                        {{drink.name}} - ${{drink.price}}
-                      </li>
-                      <hr />
-                      <li>Productos: {{count}} - Total: ${{total}}</li>
-                    </ul>
-                  </article>
-                </section>
-              </div>
-
-              <div class="col-9">
+        <article id="cafeteria" class="contenedor" style="color: whitesmoke;">
+          <section class="container-fluid">
+            <figure style="background-color: rgb(255, 255, 255); border-radius: 15px;">
+              <img src="img/LogoCubic.png" alt="">
+            </figure>
+            <div>
+              <div>
                 <section id="content">
-                  <div class="row">
-                    <div class="col-12">
-                      <article class="card-left text-center search">
+                      <div class="card-left text-center search">
                         <form>
                           <h1>Buscar por:</h1>
                           <div class="form-group row">
@@ -545,7 +526,7 @@
                               />
                             </div>
                             <div class="col-6">
-                              Un precio máximo
+                              Precio máximo
                               <input
                                 type="number"
                                 class="form-control input-card"
@@ -555,57 +536,105 @@
                             </div>
                           </div>
                         </form>
-                      </article>
-                      <h1>Te ofrecemos...</h1>
-                      <article class="card-products products">
-                        <div
-                          class="card"
-                          v-for="drink in searchProduct"
-                          :class="notAvailableCard(drink.isAvailable)"
-                        >
-                          <transition name="aparecer" appear>
-                            <img
-                              v-bind:src="drink.img"
-                              alt="Imagen de card"
-                              class="card-img-top"
-                              :class="notAvailableData(drink.isAvailable)"
-                            />
-                          </transition>
-                          <div
-                            class="card-body"
-                            :class="notAvailableData(drink.isAvailable)"
-                          >
-                            <h5 class="card-title">
-                              {{drink.name}}
-                              <h6 v-if="drink.isAvailable == false" class="not">
-                                No disponible
-                              </h6>
-                            </h5>
-                            <p class="card-text" v-if="isSearching==false">
-                              <strong>Tamaño:</strong> {{drink.size}}
-                            </p>
-                            <p class="card-text" v-if="isSearching==false">
-                              <strong>Ingredientes:</strong>
-                              {{drink.ingredients}}
-                            </p>
-                          </div>
-                          <div class="card-footer">
-                            <button
-                              class="btn btn-danger btn-card"
-                              @click="addWishlist(drink.name); appear()"
+                      </div>
+                          <div class="servicio-cont">
+                            <div
+                              v-for="drink in searchProduct"
+                              :class="notAvailableCard(drink.isAvailable)"
                             >
-                              <i class="far fa-heart"></i>
-                            </button>
-                            <span>${{drink.price}}</span>
+                              <div class="imagen-port">
+                                <img v-bind:src="drink.img" alt="" style="border: solid 5px rgb(0, 0, 0);"/>
+                                <div
+                                  class="hover-galeria"
+                                  @click="addWishlist(drink.name); appear()"
+                                >
+                                  <p>{{drink.name}}</p>
+                                  <h1
+                                    v-if="drink.isAvailable == false"
+                                    class="not"
+                                  >
+                                  <strong>NO DISPONIBLE</strong>
+                                  </h1>
+                                  <p v-if="isSearching==false">
+                                    <strong>Tamaño:</strong> {{drink.size}}
+                                  </p>
+                                  <p v-if="isSearching==false">
+                                    <strong>Ingredientes:</strong>
+                                    {{drink.ingredients}}
+                                  </p>
+                                  <span><strong>${{drink.price}}.00</strong></span>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </article>
-                    </div>
-                  </div>
                 </section>
               </div>
             </div>
           </section>
+          <br />
+
+          <br />
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-info"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            Lista de Deseados
+          </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered bg-dark">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Modal title
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="col-12">
+                    <section id="wishlist">
+                      <div class="wislist">
+                        <h1 class="text-center">Lista de Deseados</h1>
+                        <ul style="list-style: none">
+                          <li v-for="drink in wishlist">
+                            {{drink.name}} - ${{drink.price}}
+                          </li>
+                          <hr />
+                          <li>Productos: {{count}} - Total: ${{total}}</li>
+                        </ul>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Salir
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </article>
       </div>
     </div>
