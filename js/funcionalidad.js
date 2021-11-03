@@ -157,7 +157,7 @@ const gim = new Vue
         el: '#stock',
         data: {
             newProductName: '',
-            newProductQuantity: 0,
+            newProductQuantity: 1,
             newProductPrice: 0,
             products: [
                 {
