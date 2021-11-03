@@ -231,7 +231,7 @@ const cafeteria = new Vue
         data: {
             products: [
                 {
-                    img: '../../img/Cafe_1.jpeg',
+                    img: 'img/Cafe_1.jpeg',
                     name: 'Explosión de manzana caliente',
                     isAvailable: true,
                     size: '1 litro',
@@ -239,7 +239,7 @@ const cafeteria = new Vue
                     ingredients: 'Sidra de manzana al vapor con sabores de manzana acaramelada y cubierta con crema batida, llovizna de caramelo y canela molida.',
                 },
                 {
-                    img: '../../img/Cafe_2.png',
+                    img: 'img/Cafe_2.png',
                     name: 'Fogata mocha',
                     isAvailable: false,
                     size: '600 mililitros',
@@ -247,7 +247,7 @@ const cafeteria = new Vue
                     ingredients: 'Chocolate real derretido en leche al vapor y combinado con nuestro rico espresso y sabor a malvavisco tostado. Cubierto con crema batida, mini malvaviscos y chispas de chocolate.',
                 },
                 {
-                    img: '../../img/Cafe_3.jpeg',
+                    img: 'img/Cafe_3.jpeg',
                     name: 'Sándwich de gofres de arce',
                     isAvailable: true,
                     size: '1 pieza',
@@ -255,7 +255,7 @@ const cafeteria = new Vue
                     ingredients: 'Salchicha de pollo gouda, queso gouda y un huevo frito sin jaula intercalado entre dos waffles de arce.',
                 },
                 {
-                    img: '../../img/Cafe_4.jpeg',
+                    img: 'img/Cafe_4.jpeg',
                     name: 'Taza de cachorro',
                     isAvailable: true,
                     size: '400 mililitros',
@@ -263,7 +263,7 @@ const cafeteria = new Vue
                     ingredients: 'Invita a tu peludo amigo a una taza de cachorro de caribú. Alegra su día con 4 onzas de crema batida.',
                 },
                 {
-                    img: '../../img/Cafe_5.jpeg',
+                    img: 'img/Cafe_5.jpeg',
                     name: 'Pastel de chocolate pop',
                     isAvailable: false,
                     size: '1 pieza',
