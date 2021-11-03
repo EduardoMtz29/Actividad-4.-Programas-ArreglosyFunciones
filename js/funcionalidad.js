@@ -18,6 +18,7 @@ function temaSeleccionado() {
     //Almacenar el dato de la opción del usuario
     var articulo = document.getElementById("temas").value;
     document.getElementById(articulo).style.display = "block";
+
 }
 
 function mostrarCajas() {
@@ -152,6 +153,15 @@ new Vue({
 });
 
 //Tarea 8
+function gimnasio() {
+    setTimeout(function () {
+        $(".content").fadeOut(1500);
+    }, 2000);
+
+    setTimeout(function () {
+        $(".content2").fadeIn(1500);
+    }, 3000)
+}
 const gim = new Vue
     ({
         el: '#stock',
@@ -298,7 +308,7 @@ const cafeteria = new Vue
             addWishlist: function (nameProduct) {
                 for (drink of this.products) {
                     if (drink.name == nameProduct) {
-                        wishlist.wishlist.push({name: drink.name, price: drink.price });
+                        wishlist.wishlist.push({ name: drink.name, price: drink.price });
                         wishlist.count = wishlist.wishlist.length;
                     }
                 }
@@ -327,6 +337,7 @@ const wishlist = new Vue
             count: 0,
         },
     });
+
 
 $('#myModal').on('shown.bs.modal', function () {
     $('#myInput').trigger('focus')

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ejercicios</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <link rel="stylesheet" href="css/EJS_3.css" type="text/css" />
     <!--Links de bootstrap-->
     <link
@@ -32,7 +33,7 @@
     </header>
     <div class="row container-fluid" id="todo">
       <aside id="lateral" class="col-sm-3">
-        <select name="" id="temas">
+        <select name="" id="temas" onchange="window[this.value]();">
           <option value="0" disabled>Seleccione...</option>
           <option value="cajas">Cajas</option>
           <option value="encuesta">Encuesta</option>
@@ -406,173 +407,190 @@
         </article>
 
         <article id="gimnasio" class="contenedor">
-          <section id="stock" style="color: whitesmoke">
-            <div class="row">
-              <div class="col-6 offset-4">
-                <fieldset class="formulario">
-                  <legend>Nuevo producto</legend>
-                  <div class="form-group">
-                    <label>Nombre del producto</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      v-model="newProductName"
-                    />
-                    <label>Cantidad</label>
-                    <input
-                    min="1"
-                    max="999"
-                      type="number"
-                      class="form-control"
-                      v-model="newProductQuantity"
-                    />
-                    <label>Precio</label>
-                    <input
-                    min="0"
-                    max="9999"
-                      type="number"
-                      class="form-control"
-                      v-model="newProductPrice"
-                      @keyup.enter="add()"
-                    />
-                  </div>
-                  <div class="form-group text-center m-3">
-                    <button class="btn btn-info" @click="add()">Agregar</button>
-                  </div>
+          <div class="content">
+            <figure onclick="barras()">
+              <img
+                style="border-radius: 15px"
+                src="img/Barras.jpg"
+                height="500px"
+              />
+            </figure>
+          </div>
+          <div class="content2" style="display: none">
+            <figure>
+              <img style="border-radius: 15px" src="img/Barras.jpg" />
+            </figure>
+            <section id="stock" style="color: whitesmoke">
+              <div class="row">
+                <div class="col-6 offset-3">
+                  <fieldset class="formulario">
+                    <legend>Nuevo producto</legend>
+                    <div class="form-group">
+                      <label>Nombre del producto</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="newProductName"
+                      />
+                      <label>Cantidad</label>
+                      <input
+                        min="1"
+                        max="999"
+                        type="number"
+                        class="form-control"
+                        v-model="newProductQuantity"
+                      />
+                      <label>Precio</label>
+                      <input
+                        min="0"
+                        max="9999"
+                        type="number"
+                        class="form-control"
+                        v-model="newProductPrice"
+                        @keyup.enter="add()"
+                      />
+                    </div>
+                    <div class="form-group text-center m-3">
+                      <button class="btn btn-info" @click="add()">
+                        Agregar
+                      </button>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+
+              <div class="m-lg-4">
+                <fieldset>
+                  <legend>Producto: {{numProducts}}</legend>
+                  <table class="table table-dark table-striped">
+                    <tbody>
+                      <tr
+                        v-for="product in products"
+                        :class="{zero: product.totalPrice==0}"
+                      >
+                        <th>
+                          <div class="input-group sm-6">
+                            <button
+                              class="btn btn-info b"
+                              @click="product.productQuantity--; recalculate()"
+                              :disabled="product.productQuantity == 0"
+                            >
+                              -
+                            </button>
+                            <input
+                              type="number"
+                              class="form-control q"
+                              v-model="product.productQuantity"
+                              @keyup="recalculate()"
+                            />
+                            <button
+                              class="btn btn-info b"
+                              @click="product.productQuantity++; recalculate()"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </th>
+                        <td>{{product.productName}}</td>
+                        <td v-if="product.totalPrice>0">
+                          ${{product.singlePrice}}
+                        </td>
+                        <td v-if="product.totalPrice>0">
+                          ${{product.totalPrice}}
+                        </td>
+                        <td colspan="2" v-else class="text-center font">
+                          SIN STOCK
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2"></td>
+                        <th>Subtotal:</th>
+                        <td>${{subtotal}}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2"></td>
+                        <th>IVA</th>
+                        <td>${{iva}}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2"></td>
+                        <th>Total</th>
+                        <td>${{total}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </fieldset>
               </div>
-            </div>
-
-            <div class="m-lg-4">
-              <fieldset>
-                <legend>Producto: {{numProducts}}</legend>
-                <table class="table table-dark table-striped">
-                  <tbody>
-                    <tr
-                      v-for="product in products"
-                      :class="{zero: product.totalPrice==0}"
-                    >
-                      <th>
-                        <div class="input-group sm-6">
-                          <button
-                            class="btn btn-info b"
-                            @click="product.productQuantity--; recalculate()"
-                            :disabled="product.productQuantity == 0"
-                          >
-                            -
-                          </button>
-                          <input
-                            type="number"
-                            class="form-control q"
-                            v-model="product.productQuantity"
-                            @keyup="recalculate()"
-                          />
-                          <button
-                            class="btn btn-info b"
-                            @click="product.productQuantity++; recalculate()"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </th>
-                      <td>{{product.productName}}</td>
-                      <td v-if="product.totalPrice>0">
-                        ${{product.singlePrice}}
-                      </td>
-                      <td v-if="product.totalPrice>0">
-                        ${{product.totalPrice}}
-                      </td>
-                      <td colspan="2" v-else class="text-center font">
-                        SIN STOCK
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"></td>
-                      <th>Subtotal:</th>
-                      <td>${{subtotal}}</td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"></td>
-                      <th>IVA</th>
-                      <td>${{iva}}</td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"></td>
-                      <th>Total</th>
-                      <td>${{total}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </fieldset>
-            </div>
-          </section>
+            </section>
+          </div>
         </article>
 
-        <article id="cafeteria" class="contenedor" style="color: whitesmoke;">
+        <article id="cafeteria" class="contenedor" style="color: whitesmoke">
           <section class="container-fluid">
-            <figure style="background-color: rgb(255, 255, 255); border-radius: 15px;">
-              <img src="img/LogoCubic.png" alt="">
+            <figure
+              style="background-color: rgb(255, 255, 255); border-radius: 15px"
+            >
+              <img src="img/LogoCubic.png" alt="" />
             </figure>
             <div>
               <div>
                 <section id="content">
-                      <div class="text-center">
-                        <form>
-                          <h1>Menú</h1>
-                          <div class="form-group row">
-                            <div class="col-6">
-                              Nombre del producto
-                              <input
-                                type="text"
-                                class="form-control input-card"
-                                v-model="toSearch"
-                                @keyup="validateSearchText()"
-                              />
-                            </div>
-                            <div class="col-6">
-                              Precio máximo
-                              <input
-                                type="number"
-                                min="0"
-                                max="200"
-                                class="form-control input-card"
-                                v-model="maximum"
-                              />
-                              <br />
-                            </div>
-                          </div>
-                        </form>
+                  <div class="text-center">
+                    <form>
+                      <h1>Menú</h1>
+                      <div class="form-group row">
+                        <div class="col-6">
+                          Nombre del producto
+                          <input
+                            type="text"
+                            class="form-control input-card"
+                            v-model="toSearch"
+                            @keyup="validateSearchText()"
+                          />
+                        </div>
+                        <div class="col-6">
+                          Precio máximo
+                          <input
+                            type="number"
+                            min="0"
+                            max="200"
+                            class="form-control input-card"
+                            v-model="maximum"
+                          />
+                          <br />
+                        </div>
                       </div>
-                          <div class="servicio-cont">
-                            <div
-                              v-for="drink in searchProduct"
-                              :class="notAvailableCard(drink.isAvailable)"
-                            >
-                              <div class="imagen-port">
-                                <img v-bind:src="drink.img" alt="" style="border: solid 5px rgb(0, 0, 0);"/>
-                                <div
-                                  class="hover-galeria"
-                                  @click="addWishlist(drink.name); appear()"
-                                >
-                                  <p>{{drink.name}}</p>
-                                  <h1
-                                    v-if="drink.isAvailable == false"
-                                    class="not"
-                                  >
-                                  <strong>NO DISPONIBLE</strong>
-                                  </h1>
-                                  <p>
-                                    <strong>Tamaño:</strong> {{drink.size}}
-                                  </p>
-                                  <p >
-                                    <strong>Ingredientes:</strong>
-                                    {{drink.ingredients}}
-                                  </p>
-                                  <span><strong>${{drink.price}}.00</strong></span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                    </form>
+                  </div>
+                  <div class="servicio-cont">
+                    <div
+                      v-for="drink in searchProduct"
+                      :class="notAvailableCard(drink.isAvailable)"
+                    >
+                      <div class="imagen-port">
+                        <img
+                          v-bind:src="drink.img"
+                          alt=""
+                          style="border: solid 5px rgb(0, 0, 0)"
+                        />
+                        <div
+                          class="hover-galeria"
+                          @click="addWishlist(drink.name); appear()"
+                        >
+                          <p>{{drink.name}}</p>
+                          <h1 v-if="drink.isAvailable == false" class="not">
+                            <strong>NO DISPONIBLE</strong>
+                          </h1>
+                          <p><strong>Tamaño:</strong> {{drink.size}}</p>
+                          <p>
+                            <strong>Ingredientes:</strong>
+                            {{drink.ingredients}}
+                          </p>
+                          <span><strong>${{drink.price}}.00</strong></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </section>
               </div>
             </div>
@@ -582,65 +600,65 @@
           <br />
           <section id="wishlist">
             <button
-            type="button"
-            class="btn btn-info"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            Lista de Deseados - {{count}}
-          </button>
+              type="button"
+              class="btn btn-info"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            >
+              Lista de Deseados - {{count}}
+            </button>
 
-          <!-- Modal -->
-          <div
-            class="modal fade"
-            id="exampleModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog modal-dialog-centered bg-dark">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    Productos: {{count}}
-                  </h5>
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="col-12">
-                    <section id="wishlist">
-                      <div class="wislist">
-                        <h1 class="text-center">Lista de Deseados</h1>
-                        <ul style="list-style: none">
-                          <hr>
-                          <li v-for="drink in wishlist">
-                            {{drink.name}} - ${{drink.price}}
-                          </li>
-                        </ul>
-                      </div>
-                    </section>
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered bg-dark">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Productos: {{count}}
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    Salir
-                  </button>
+                  <div class="modal-body">
+                    <div class="col-12">
+                      <section id="wishlist">
+                        <div class="wislist">
+                          <h1 class="text-center">Lista de Deseados</h1>
+                          <ul style="list-style: none">
+                            <hr />
+                            <li v-for="drink in wishlist">
+                              {{drink.name}} - ${{drink.price}}
+                            </li>
+                          </ul>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Salir
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          </section>          
+          </section>
         </article>
       </div>
     </div>
