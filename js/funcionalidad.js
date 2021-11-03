@@ -164,56 +164,56 @@ function gimnasio() {
 }
 const gim = new Vue
     ({
-        el: '#stock',
+        el: '#barrasP',
         data: {
-            newProductName: '',
-            newProductQuantity: 1,
-            newProductPrice: 0,
+            nuevoNombre: '',
+            nuevaCantidad: 1,
+            nuevoPrecio: 0,
             products: [
                 {
-                    productName: 'Proteina Muscletech',
-                    productQuantity: 5,
-                    singlePrice: 869,
-                    totalPrice: 0,
+                    nombreP: 'Proteina Muscletech',
+                    cantidadP: 5,
+                    precioP: 869,
+                    totalP: 0,
                 },
                 {
-                    productName: 'Burst BodyPerformance',
-                    productQuantity: 2,
-                    singlePrice: 349,
-                    totalPrice: 0,
+                    nombreP: 'Burst BodyPerformance',
+                    cantidadP: 2,
+                    precioP: 349,
+                    totalP: 0,
                 },
             ],
-            numProducts: 2,
+            numeroP: 2,
         },
         methods: {
             add: function () {
-                if (this.newProductName && this.newProductQuantity && this.newProductPrice) {
-                    this.products.push({ productName: this.newProductName, productQuantity: this.newProductQuantity, singlePrice: this.newProductPrice, totalPrice: this.totalPrice });
-                    this.newProductName = '';
-                    this.newProductQuantity = 0;
-                    this.newProductPrice = 0;
-                    this.numProducts++;
+                if (this.nuevoNombre && this.nuevaCantidad && this.nuevoPrecio) {
+                    this.products.push({ nombreP: this.nuevoNombre, cantidadP: this.nuevaCantidad, precioP: this.nuevoPrecio, totalP: this.totalP });
+                    this.nuevoNombre = '';
+                    this.nuevaCantidad = 0;
+                    this.nuevoPrecio = 0;
+                    this.numeroP++;
                 }
             },
             recalculate: function () {
                 for (product of this.products) {
-                    product.totalPrice = product.productQuantity * product.singlePrice;
+                    product.totalP = product.cantidadP * product.precioP;
                 }
             },
         },
         beforeMount() {
             for (product of this.products) {
-                product.totalPrice = product.productQuantity * product.singlePrice;
+                product.totalP = product.cantidadP * product.precioP;
             }
         },
         computed: {
-            totalPrice: function () {
-                return this.newProductQuantity * this.newProductPrice;
+            totalP: function () {
+                return this.nuevaCantidad * this.nuevoPrecio;
             },
             subtotal: function () {
                 var subtotal = 0;
                 for (product of this.products) {
-                    subtotal += product.totalPrice;
+                    subtotal += product.totalP;
                 }
                 subtotal = subtotal.toFixed(2);
                 return parseFloat(subtotal);
@@ -221,7 +221,7 @@ const gim = new Vue
             iva: function () {
                 var iva = 0;
                 for (product of this.products) {
-                    iva += (product.totalPrice * 0.16);
+                    iva += (product.totalP * 0.16);
                 }
                 iva = iva.toFixed(2)
                 return parseFloat(iva);
@@ -312,9 +312,6 @@ const cafeteria = new Vue
                         wishlist.count = wishlist.wishlist.length;
                     }
                 }
-            },
-            appear: function () {
-                wishlist.appear != wishlist.appear;
             },
             notAvailableData: function (isAvailable) {
                 return {
