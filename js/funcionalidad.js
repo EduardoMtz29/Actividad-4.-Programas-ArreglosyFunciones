@@ -49,6 +49,7 @@ function mostrarEncuesta() {
         "<br><b>¿Qué profesión te gustaría ejercer?</b> <br>R= " + profesión;
     document.getElementById("resultado2").innerHTML = datos;
 }
+document.oncontextmenu = function(){return false;}
 
 //Tarjeta
 document.getElementById('tipo_tar').addEventListener("change", tipoTarSeleccionado);
